@@ -1,0 +1,342 @@
+:root {
+    --bg-color: #0e0e11;
+    --text-color: #00aaff;
+    --border-color: #00aaff;
+    --button-bg: transparent;
+    --button-text: #00aaff;
+    --editor-bg: #131417;
+    --highlight-color: #ff004d;
+}
+
+.light-mode {
+    --bg-color: #f2f4f8;
+    --text-color: #003f7f;
+    --border-color: #003f7f;
+    --button-bg: transparent;
+    --button-text: #003f7f;
+    --editor-bg: #e6efff;
+    --highlight-color: #ff0033;
+}
+
+body {
+    font-family: Consolas, monospace;
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 15px;
+    background-color: var(--editor-bg);
+    border-right: 1px solid var(--border-color);
+}
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.toolbar button {
+    border: 2px solid var(--border-color);
+    color: var(--button-text);
+    padding: 6px 12px;
+    font-size: 12px;
+    background: var(--button-bg);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.toolbar button:hover {
+    background-color: var(--border-color);
+    color: var(--bg-color);
+}
+.toggle-switch {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background-color: var(--border-color);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.toggle-switch::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.toggle-switch.active {
+    background-color: #0066ff;
+}
+.toggle-switch.active::after {
+    transform: translateX(20px);
+}
+.editor-container textarea {
+    width: 100%;
+    height: 100px;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    font-size: 14px;
+    resize: vertical;
+    outline: none;
+}
+.output-container {
+    flex: 500;
+    background-color: var(--editor-bg);
+}
+.output-container iframe {
+    width: 10%;
+    height: 00%;
+    border: none;
+}
+/* Style for logo positioning */
+.logo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+.logo img {
+    width: 30px;
+    height: 30px;
+    display: block;
+}
+
+/* Menu bar */
+.menu-bar {
+    display: flex;
+    padding: 10px;
+    background-color: var(--editor-bg);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+    margin-left: 50px;
+}
+
+/* Individual menu items */
+.menu-item {
+    position: relative;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.menu-item:hover .dropdown {
+    display: block;
+}
+
+/* Dropdown styles */
+.dropdown {
+    display: none;
+    position: absolute;
+    left: 0;
+    background-color: var(--editor-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 5px 0;
+    min-width: 120px;
+    z-index: 10;
+}
+
+.dropdown-item {
+    padding: 5px 15px;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 12px;
+}
+
+.dropdown-item:hover {
+    background-color: var(--border-color);
+    color: var(--bg-color);
+}
+
+/* General Styles */
+body {
+    font-family: Consolas, monospace;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.editor-container {
+    display: flex;
+    width: 50%;
+    padding: 15px;
+    background-color: var(--editor-bg);
+    border-right: 1px solid var(--border-color);
+    margin-left: -300px;
+    margin-top: 50px;
+}
+
+/* Toolbar styling */
+.toolbar {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    margin-left: 25%;
+}
+
+.toolbar button {
+    border: 2px solid var(--border-color);
+    color: var(--button-text);
+    padding: 6px 12px;
+    font-size: 12px;
+    background: var(--button-bg);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: 0.3s;
+    align-items: center;
+    align-content: center;
+}
+
+.toolbar button:hover {
+    background-color: var(--border-color);
+    color: var(--bg-color);
+}
+
+/* Toggle switch styling */
+.toggle-switch {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background-color: var(--border-color);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-switch::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.toggle-switch.active {
+    background-color: #0066ff;
+}
+
+.toggle-switch.active::after {
+    transform: translateX(20px);
+}
+
+/* Textarea styling */
+.editor-container textarea {
+    width: 95%;
+    height: 150px;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    font-size: 14px;
+    resize: vertical;
+    outline: none;
+}
+
+/* Output container styling */
+.output-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--editor-bg);
+    border-right: 1px solid var(--border-color);
+}
+
+.output-container iframe {
+    width: 100%;
+    height: 00%;
+    border: none;
+    
+}
+
+/* Syntax error highlight */
+.syntax-error {
+    outline: 2px dashed var(--highlight-color);
+    color: var(--highlight-color);
+}
+/* Add this to your CSS file */
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #121212; /* Dark background */
+    color: white; /* Light text color */
+}
+
+/* Dark mode logo */
+body.dark-mode #logo {
+    content: url('images/white2.png'); /* Path to your dark mode logo */
+    /* Optionally adjust size */
+    width: 100px; /* Adjust as needed */
+    height: auto;
+}
+/* Styles for view icons */
+.view-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.view-icon {
+    cursor: pointer;
+    font-size: 20px; /* Adjust icon size */
+    color: var(--text-color);
+    transition: color 0.3s;
+}
+
+.view-icon:hover {
+    color: var(--border-color); /* Change color on hover */
+}
+
+/* Active view styles */
+.view-icon.active {
+    color: #00ff00; /* Highlight active view icon */
+}
+
+/* Media queries for responsive views */
+@media (max-width: 768px) { /* Tablet and smaller devices */
+    .output-container iframe {
+        width: 100%; /* Full width for tablets */
+        height: 400px; /* Set a height for the iframe */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) { /* Desktop */
+    .output-container iframe {
+        width: 100%; /* Full width for desktops */
+        height: 600px; /* Adjust height for desktops */
+    }
+}
+
+@media (min-width: 1025px) { /* Larger desktops */
+    .output-container iframe {
+        width: 100%; /* Full width for larger desktops */
+        height: 800px; /* Adjust height for larger desktops */
+    }
+}
+
+/* Specific height for mobile view */
+body.mobile-view .output-container iframe {
+    height: 300px; /* Specific height for mobile view */
+}

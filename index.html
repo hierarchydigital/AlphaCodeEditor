@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Code Editor | By Hierarchy Digital</title>
+    <link rel="icon" href="images/whitelogo.png">
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        #loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        /* Logo Image */
+        #loader img {
+            width: 90px;
+            height: auto;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3));
+            margin-bottom: 40px;
+        }
+
+        /* Dual Spinner */
+        .dual-spinner {
+            display: flex;
+            gap: 1rem;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .dual-spinner div {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            animation: bounce 0.6s infinite alternate;
+        }
+
+        /* Animation delays for each dot */
+        .dual-spinner div:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        .dual-spinner div:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        .dual-spinner div:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        /* Keyframes for bouncing animation */
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-20px); /* Adjust the bounce height */
+            }
+        }
+
+        /* Product Text */
+        .product h5 {
+            font-size: 1rem;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div id="loader">
+        <img src="images\whitelogo.png" alt="Your Logo"> <!-- Replace with your logo URL -->
+        <div class="dual-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="product"><h5>A product of Hierarchy Digital</h5></div>
+    </div>
+    <div class ="logo"> 
+        <a href="index.html" class="logo" id="logo"><img src="images/logo.png" alt="logo"></a>
+       
+    </div>
+<div class="mobile-warning" style="display: none;">
+    <h1>Access Denied</h1>
+    <p>This site is only accessible on larger screens. Please use a desktop or laptop.</p>
+</div>
+    <!-- Menu bar resembling Windows app style -->
+    <div class="menu-bar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo" />
+        </div>
+        <div class="menu-item">File
+            <div class="dropdown">
+                <div class="dropdown-item" onclick="newProject()">New Project</div>
+                <div class="dropdown-item" onclick="saveAs()">Save As</div>
+            </div>
+        </div>
+        <div class="menu-item">Edit
+            <div class="dropdown">
+                <div class="dropdown-item" onclick="undo()">Undo</div>
+                <div class="dropdown-item" onclick="redo()">Redo</div>
+            </div>
+        </div>
+        <div class="menu-item">View
+            <div class="dropdown">
+                <div class="dropdown-item" onclick="showSidePanel()">Show Side Panel</div>
+                <div class="dropdown-item" onclick="halfView()">Half View</div>
+                <div class="dropdown-item" onclick="closeView()">Closed View</div>
+            </div>
+        </div>
+        <div class="menu-item">Options
+            <div class="dropdown">
+                <div class="dropdown-item" onclick="toggleMode()">Toggle Dark Mode</div>
+            </div>
+        </div>
+    </div>
+    <div class="editor-container">
+        <div class="toolbar">
+            <button onclick="undo()">Undo</button>
+            <button onclick="redo()">Redo</button>
+            <button onclick="clearAll()">Clear All</button>
+            <button onclick="saveFiles()">Save Files</button>
+            <button onclick="alphaAi()">Alpha AI</button>
+        </div>
+
+        <h3>HTML</h3>
+        <textarea id="html" placeholder="Type HTML here..."></textarea>
+        
+        <h3>CSS</h3>
+        <textarea id="css" placeholder="Type CSS here..."></textarea>
+        
+        <h3>JavaScript</h3>
+        <textarea id="js" placeholder="Type JavaScript here..."></textarea>
+    
+    </div>
+
+    <div class="output-container">
+        <iframe id="output"></iframe>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Check the screen width on page load
+        window.onload = function() {
+            if (window.innerWidth <= 768) { // Set the width limit for mobile devices
+                window.location.href = "compatibility.html"; // Redirect to compatibility page
+            }
+        };
+          // Wait for the page to load
+    window.addEventListener('load', function() {
+        // Show the loader
+        document.getElementById('loader').style.display = 'flex';
+        
+        // Hide the loader after 3 seconds
+        setTimeout(function() {
+            document.getElementById('loader').style.display = 'none';
+        }, 3000); // 3000 milliseconds = 3 seconds
+    });
+    </script>
+</body>
+</html>
