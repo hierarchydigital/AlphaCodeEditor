@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpha Code Editor | By Hierarchy Digital</title>
     <link rel="icon" href="images/whitelogo.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typo-js/1.1.1/typo.js"></script>
     <link rel="stylesheet" href="style.css" />
     <style>
         #loader {
@@ -123,6 +124,12 @@
         </div>
     </div>
     <div class="editor-container">
+        <h2>Drag & Drop a Code File Here</h2>
+        <div id="drop-area">
+            <p>Drop your file here or click to select a file.</p>
+            <input type="file" id="fileElem" accept=".js,.html,.css" style="display:none;">
+            <label for="fileElem" id="file-label">Select a file</label>
+        </div>
         <div class="toolbar">
             <button onclick="undo()">Undo</button>
             <button onclick="redo()">Redo</button>
@@ -163,6 +170,180 @@
             document.getElementById('loader').style.display = 'none';
         }, 3000); // 3000 milliseconds = 3 seconds
     });
+    // Drag and Drop functionality
+const dropArea = document.getElementById('drop-area');
+const htmlTextArea = document.getElementById('html');
+const cssTextArea = document.getElementById('css');
+const jsTextArea = document.getElementById('js');
+const outputFrame = document.getElementById('output');
+
+// Prevent default behaviors for drag events
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, preventDefaults, false);
+    document.body.addEventListener(eventName, preventDefaults, false);
+});
+
+function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+// Highlight drop area when dragging over it
+['dragenter', 'dragover'].forEach(eventName => {
+    dropArea.addEventListener(eventName, highlight, false);
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, unhighlight, false);
+});
+
+function highlight() {
+    dropArea.classList.add('highlight');
+}
+
+function unhighlight() {
+    dropArea.classList.remove('highlight');
+}
+
+// Handle dropped files
+dropArea.addEventListener('drop', handleDrop, false);
+dropArea.addEventListener('click', () => {
+    document.getElementById('fileElem').click();
+});
+
+// Read the file contents
+function handleDrop(e) {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+
+    if (files.length) {
+        readFile(files[0]);
+    }
+}
+
+// Read the file contents
+function readFile(file) {
+    const reader = new FileReader();
+    
+    reader.onload = function(event) {
+        const content = event.target.result;
+        // Assuming the file is either HTML, CSS, or JS, update the respective textarea
+        if (file.type === "text/html") {
+            htmlTextArea.value = content;
+        } else if (file.type === "text/css") {
+            cssTextArea.value = content;
+        } else if (file.type === "application/javascript" || file.type === "text/javascript") {
+            jsTextArea.value = content;
+        } else {
+            alert("Unsupported file type!");
+            return;
+        }
+        // Update the live preview
+        updatePreview();
+    };
+
+    reader.readAsText(file);
+}
+
+// Allow selecting files through the file input
+document.getElementById('fileElem').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        readFile(file);
+    }
+});
+
+// Update the live preview
+function updatePreview() {
+    const htmlContent = htmlTextArea.value;
+    const cssContent = `<style>${cssTextArea.value}</style>`;
+    const jsContent = `<script>${jsTextArea.value}<\/script>`;
+    const output = outputFrame.contentWindow.document;
+
+    output.open();
+    output.write(htmlContent + cssContent + jsContent);
+    output.close();
+}
+
+// Update the preview when text areas change
+htmlTextArea.addEventListener('input', updatePreview);
+cssTextArea.addEventListener('input', updatePreview);
+jsTextArea.addEventListener('input', updatePreview);
+// Spell check functionality
+function checkSpelling(textArea) {
+    const text = textArea.value;
+    const words = text.split(/\s+/);
+    
+    // Clear previous errors
+    textArea.classList.remove('error');
+    
+    words.forEach(word => {
+        if (!dictionary.check(word)) {
+            highlightError(textArea, word);
+        }
+    });
+}
+
+function highlightError(textArea, word) {
+    // Highlight errors (simple implementation)
+    const content = textArea.value;
+    const highlighted = content.replace(new RegExp(`\\b${word}\\b`, 'g'), `<span class="error">${word}</span>`);
+    textArea.innerHTML = highlighted; // Use innerHTML to show the highlight (not recommended for textareas, consider using divs for display)
+}
+
+// Spell check functionality using LanguageTool API
+async function checkSpelling(text, type) {
+    const language = 'en-US'; // Change if you need to support other languages
+    const apiUrl = 'https://api.languagetoolplus.com/v2/check'; // LanguageTool API endpoint
+
+    // Prepare the data for the request
+    const data = new URLSearchParams();
+    data.append('text', text);
+    data.append('language', language);
+
+    // Send the request to the LanguageTool API
+    const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    });
+
+    const result = await response.json();
+    highlightErrors(result.matches, type);
+}
+
+function highlightErrors(matches, type) {
+    const textArea = getTextAreaByType(type);
+
+    // Clear previous highlights
+    textArea.value = textArea.value; // Reset the textarea
+
+    // Create a highlighted version of the content
+    let highlightedContent = textArea.value;
+    
+    matches.forEach(match => {
+        const errorWord = match.context.text.substring(match.context.offset, match.context.offset + match.context.length);
+        // Replace the error word with a highlighted version
+        highlightedContent = highlightedContent.replace(new RegExp(`\\b${errorWord}\\b`, 'g'), `<span class="highlighted">${errorWord}</span>`);
+    });
+
+    // Update the textarea with highlighted content
+    updateTextAreaWithHTML(textArea, highlightedContent);
+}
+
+function getTextAreaByType(type) {
+    if (type === "text/html") {
+        return htmlTextArea;
+    } else if (type === "text/css") {
+        return cssTextArea;
+    } else if (type === "application/javascript" || type === "text/javascript") {
+        return jsTextArea;
+    }
+    return null;
+}
+
     </script>
 </body>
 </html>

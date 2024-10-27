@@ -270,43 +270,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-const textarea = document.getElementById('codeInput');
-    const previewFrame = document.getElementById('previewFrame');
-
-    // Function to run the code
-    function runCode() {
-        const code = textarea.value;
-        const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-        doc.open();
-        doc.write(code);
-        doc.close();
+ // Keyboard shortcuts
+ document.addEventListener('keydown', (event) => {
+    if (event.ctrlKey && event.key === 'Enter') { // Ctrl + Enter to run
+        runCode();
+    } else if (event.ctrlKey && event.key === 's') { // Ctrl + S to save
+        event.preventDefault(); // Prevent the default save dialog
+        saveCode();
+    } else if (event.ctrlKey && event.key === 'd') { // Ctrl + D to toggle theme
+        toggleTheme();
     }
-
-    // Function to save code (mock implementation)
-    function saveCode() {
-        const code = textarea.value;
-        // Here you can implement saving to localStorage or a backend server
-        alert("Code saved: \n" + code);
-    }
-
-    // Function to toggle dark/light mode
-    function toggleTheme() {
-        document.body.classList.toggle('light-mode');
-    }
-
-    // Event listeners for buttons
-    document.getElementById('runButton').addEventListener('click', runCode);
-    document.getElementById('saveButton').addEventListener('click', saveCode);
-    document.getElementById('toggleThemeButton').addEventListener('click', toggleTheme);
-
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (event) => {
-        if (event.ctrlKey && event.key === 'Enter') { // Ctrl + Enter to run
-            runCode();
-        } else if (event.ctrlKey && event.key === 's') { // Ctrl + S to save
-            event.preventDefault(); // Prevent the default save dialog
-            saveCode();
-        } else if (event.ctrlKey && event.key === 'd') { // Ctrl + D to toggle theme
-            toggleTheme();
-        }
-    });
+});
