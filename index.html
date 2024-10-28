@@ -87,90 +87,86 @@
     </div>
     <div class ="logo"> 
         <a href="index.html" class="logo" id="logo"><img src="images/logo.png" alt="logo"></a>
-       
-    </div>
-<div class="mobile-warning" style="display: none;">
-    <h1>Access Denied</h1>
-    <p>This site is only accessible on larger screens. Please use a desktop or laptop.</p>
-</div>
-    <!-- Menu bar resembling Windows app style -->
-    <div class="menu-bar">
-        <div class="logo">
-            <img src="images/logo.png" alt="Logo" />
-        </div>
-        <div class="menu-item">File
-            <div class="dropdown">
-                <div class="dropdown-item" onclick="newProject()">New Project</div>
-                <div class="dropdown-item" onclick="saveAs()">Save As</div>
-            </div>
-        </div>
-        <div class="menu-item">Edit
-            <div class="dropdown">
-                <div class="dropdown-item" onclick="undo()">Undo</div>
-                <div class="dropdown-item" onclick="redo()">Redo</div>
-            </div>
-        </div>
-        <div class="menu-item">View
-            <div class="dropdown">
-                <div class="dropdown-item" onclick="showSidePanel()">Show Side Panel</div>
-                <div class="dropdown-item" onclick="halfView()">Half View</div>
-                <div class="dropdown-item" onclick="closeView()">Closed View</div>
-            </div>
-        </div>
-        <div class="menu-item">Options
-            <div class="dropdown">
-                <div class="dropdown-item" onclick="toggleMode()">Toggle Dark Mode</div>
-            </div>
-        </div>
-    </div>
-    <div class="editor-container">
-        <h2>Drag & Drop a Code File Here</h2>
-        <div id="drop-area">
-            <p>Drop your file here or click to select a file.</p>
-            <input type="file" id="fileElem" accept=".js,.html,.css" style="display:none;">
-            <label for="fileElem" id="file-label">Select a file</label>
-        </div>
-        <div class="toolbar">
-            <button onclick="undo()">Undo</button>
-            <button onclick="redo()">Redo</button>
-            <button onclick="clearAll()">Clear All</button>
-            <button onclick="saveFiles()">Save Files</button>
-            <button onclick="alphaAi()">Alpha AI</button>
-        </div>
-
-        <h3>HTML</h3>
-        <textarea id="html" placeholder="Type HTML here..."></textarea>
-        
-        <h3>CSS</h3>
-        <textarea id="css" placeholder="Type CSS here..."></textarea>
-        
-        <h3>JavaScript</h3>
-        <textarea id="js" placeholder="Type JavaScript here..."></textarea>
+        <div class="menu-bar">
+          <div class="logo">
+              <img src="images/logo.png" alt="Logo" />
+          </div>
+          <div class="menu-item">File
+              <div class="dropdown">
+                  <div class="dropdown-item" onclick="newProject()">New Project</div>
+                  <div class="dropdown-item" onclick="saveAs()">Save As</div>
+              </div>
+          </div>
+          <div class="menu-item">Edit
+              <div class="dropdown">
+                  <div class="dropdown-item" onclick="undo()">Undo</div>
+                  <div class="dropdown-item" onclick="redo()">Redo</div>
+              </div>
+          </div>
+          <div class="menu-item">View
+              <div class="dropdown">
+                  <div class="dropdown-item" onclick="showSidePanel()">PC</div>
+                  <div class="dropdown-item" onclick="halfView()">Tablet</div>
+                  <div class="dropdown-item" onclick="closeView()">Mobile</div>
+              </div>
+          </div>
+          <div class="menu-item">Options
+              <div class="dropdown">
+                  <div class="dropdown-item" onclick="toggleMode()">Toggle Dark Mode</div>
+              </div>
+          </div>
+      </div>
+      </div>
     
+  <div class="container">
+    <!-- Editor Container (Box 1) -->
+    <div class="editor-container">
+      <h2>Drag & Drop a Code File Here</h2>
+      <div id="drop-area">
+        <p>Drop your file here or click to select a file.</p>
+        <input type="file" id="fileElem" accept=".js,.html,.css" style="display:none;">
+        <label for="fileElem" id="file-label">Select a file</label>
+      </div>
+      <div class="toolbar">
+        <button onclick="undo()">Undo</button>
+        <button onclick="redo()">Redo</button>
+        <button onclick="clearAll()">Clear All</button>
+        <button onclick="saveFiles()">Save Files</button>
     </div>
 
-    <div class="output-container">
-        <iframe id="output"></iframe>
-    </div>
-    <script src="script.js"></script>
-    <script>
-        // Check the screen width on page load
-        window.onload = function() {
-            if (window.innerWidth <= 768) { // Set the width limit for mobile devices
-                window.location.href = "compatibility.html"; // Redirect to compatibility page
-            }
-        };
-          // Wait for the page to load
-    window.addEventListener('load', function() {
-        // Show the loader
-        document.getElementById('loader').style.display = 'flex';
-        
-        // Hide the loader after 3 seconds
-        setTimeout(function() {
-            document.getElementById('loader').style.display = 'none';
-        }, 3000); // 3000 milliseconds = 3 seconds
-    });
-    // Drag and Drop functionality
+    <h3>HTML</h3>
+    <textarea id="html" placeholder="Type HTML here..."></textarea>
+    
+    <h3>CSS</h3>
+    <textarea id="css" placeholder="Type CSS here..."></textarea>
+    
+    <h3>JavaScript</h3>
+    <textarea id="js" placeholder="Type JavaScript here..."></textarea>
+
+</div>
+
+<div class="output-container">
+    <iframe id="output"></iframe>
+</div>
+<script src="script.js"></script>
+<script>
+    // Check the screen width on page load
+    window.onload = function() {
+        if (window.innerWidth <= 768) { // Set the width limit for mobile devices
+            window.location.href = "compatibility.html"; // Redirect to compatibility page
+        }
+    };
+      // Wait for the page to load
+window.addEventListener('load', function() {
+    // Show the loader
+    document.getElementById('loader').style.display = 'flex';
+    
+    // Hide the loader after 3 seconds
+    setTimeout(function() {
+        document.getElementById('loader').style.display = 'none';
+    }, 3000); // 3000 milliseconds = 3 seconds
+});
+// Drag and Drop functionality
 const dropArea = document.getElementById('drop-area');
 const htmlTextArea = document.getElementById('html');
 const cssTextArea = document.getElementById('css');
@@ -179,90 +175,90 @@ const outputFrame = document.getElementById('output');
 
 // Prevent default behaviors for drag events
 ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, preventDefaults, false);
-    document.body.addEventListener(eventName, preventDefaults, false);
+dropArea.addEventListener(eventName, preventDefaults, false);
+document.body.addEventListener(eventName, preventDefaults, false);
 });
 
 function preventDefaults(e) {
-    e.preventDefault();
-    e.stopPropagation();
+e.preventDefault();
+e.stopPropagation();
 }
 
 // Highlight drop area when dragging over it
 ['dragenter', 'dragover'].forEach(eventName => {
-    dropArea.addEventListener(eventName, highlight, false);
+dropArea.addEventListener(eventName, highlight, false);
 });
 
 ['dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, unhighlight, false);
+dropArea.addEventListener(eventName, unhighlight, false);
 });
 
 function highlight() {
-    dropArea.classList.add('highlight');
+dropArea.classList.add('highlight');
 }
 
 function unhighlight() {
-    dropArea.classList.remove('highlight');
+dropArea.classList.remove('highlight');
 }
 
 // Handle dropped files
 dropArea.addEventListener('drop', handleDrop, false);
 dropArea.addEventListener('click', () => {
-    document.getElementById('fileElem').click();
+document.getElementById('fileElem').click();
 });
 
 // Read the file contents
 function handleDrop(e) {
-    const dt = e.dataTransfer;
-    const files = dt.files;
+const dt = e.dataTransfer;
+const files = dt.files;
 
-    if (files.length) {
-        readFile(files[0]);
-    }
+if (files.length) {
+    readFile(files[0]);
+}
 }
 
 // Read the file contents
 function readFile(file) {
-    const reader = new FileReader();
-    
-    reader.onload = function(event) {
-        const content = event.target.result;
-        // Assuming the file is either HTML, CSS, or JS, update the respective textarea
-        if (file.type === "text/html") {
-            htmlTextArea.value = content;
-        } else if (file.type === "text/css") {
-            cssTextArea.value = content;
-        } else if (file.type === "application/javascript" || file.type === "text/javascript") {
-            jsTextArea.value = content;
-        } else {
-            alert("Unsupported file type!");
-            return;
-        }
-        // Update the live preview
-        updatePreview();
-    };
+const reader = new FileReader();
 
-    reader.readAsText(file);
+reader.onload = function(event) {
+    const content = event.target.result;
+    // Assuming the file is either HTML, CSS, or JS, update the respective textarea
+    if (file.type === "text/html") {
+        htmlTextArea.value = content;
+    } else if (file.type === "text/css") {
+        cssTextArea.value = content;
+    } else if (file.type === "application/javascript" || file.type === "text/javascript") {
+        jsTextArea.value = content;
+    } else {
+        alert("Unsupported file type!");
+        return;
+    }
+    // Update the live preview
+    updatePreview();
+};
+
+reader.readAsText(file);
 }
 
 // Allow selecting files through the file input
 document.getElementById('fileElem').addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        readFile(file);
-    }
+const file = e.target.files[0];
+if (file) {
+    readFile(file);
+}
 });
 
 // Update the live preview
 function updatePreview() {
-    const htmlContent = htmlTextArea.value;
-    const cssContent = `<style>${cssTextArea.value}</style>`;
-    const jsContent = `<script>${jsTextArea.value}<\/script>`;
-    const output = outputFrame.contentWindow.document;
+const htmlContent = htmlTextArea.value;
+const cssContent = `<style>${cssTextArea.value}</style>`;
+const jsContent = `<script>${jsTextArea.value}<\/script>`;
+const output = outputFrame.contentWindow.document;
 
-    output.open();
-    output.write(htmlContent + cssContent + jsContent);
-    output.close();
+output.open();
+output.write(htmlContent + cssContent + jsContent);
+output.close();
 }
 
 // Update the preview when text areas change
@@ -271,79 +267,79 @@ cssTextArea.addEventListener('input', updatePreview);
 jsTextArea.addEventListener('input', updatePreview);
 // Spell check functionality
 function checkSpelling(textArea) {
-    const text = textArea.value;
-    const words = text.split(/\s+/);
-    
-    // Clear previous errors
-    textArea.classList.remove('error');
-    
-    words.forEach(word => {
-        if (!dictionary.check(word)) {
-            highlightError(textArea, word);
-        }
-    });
+const text = textArea.value;
+const words = text.split(/\s+/);
+
+// Clear previous errors
+textArea.classList.remove('error');
+
+words.forEach(word => {
+    if (!dictionary.check(word)) {
+        highlightError(textArea, word);
+    }
+});
 }
 
 function highlightError(textArea, word) {
-    // Highlight errors (simple implementation)
-    const content = textArea.value;
-    const highlighted = content.replace(new RegExp(`\\b${word}\\b`, 'g'), `<span class="error">${word}</span>`);
-    textArea.innerHTML = highlighted; // Use innerHTML to show the highlight (not recommended for textareas, consider using divs for display)
+// Highlight errors (simple implementation)
+const content = textArea.value;
+const highlighted = content.replace(new RegExp(`\\b${word}\\b`, 'g'), `<span class="error">${word}</span>`);
+textArea.innerHTML = highlighted; // Use innerHTML to show the highlight (not recommended for textareas, consider using divs for display)
 }
 
 // Spell check functionality using LanguageTool API
 async function checkSpelling(text, type) {
-    const language = 'en-US'; // Change if you need to support other languages
-    const apiUrl = 'https://api.languagetoolplus.com/v2/check'; // LanguageTool API endpoint
+const language = 'en-US'; // Change if you need to support other languages
+const apiUrl = 'https://api.languagetoolplus.com/v2/check'; // LanguageTool API endpoint
 
-    // Prepare the data for the request
-    const data = new URLSearchParams();
-    data.append('text', text);
-    data.append('language', language);
+// Prepare the data for the request
+const data = new URLSearchParams();
+data.append('text', text);
+data.append('language', language);
 
-    // Send the request to the LanguageTool API
-    const response = await fetch(apiUrl, {
-        method: 'POST',
-        body: data,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        }
-    });
+// Send the request to the LanguageTool API
+const response = await fetch(apiUrl, {
+    method: 'POST',
+    body: data,
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    }
+});
 
-    const result = await response.json();
-    highlightErrors(result.matches, type);
+const result = await response.json();
+highlightErrors(result.matches, type);
 }
 
 function highlightErrors(matches, type) {
-    const textArea = getTextAreaByType(type);
+const textArea = getTextAreaByType(type);
 
-    // Clear previous highlights
-    textArea.value = textArea.value; // Reset the textarea
+// Clear previous highlights
+textArea.value = textArea.value; // Reset the textarea
 
-    // Create a highlighted version of the content
-    let highlightedContent = textArea.value;
-    
-    matches.forEach(match => {
-        const errorWord = match.context.text.substring(match.context.offset, match.context.offset + match.context.length);
-        // Replace the error word with a highlighted version
-        highlightedContent = highlightedContent.replace(new RegExp(`\\b${errorWord}\\b`, 'g'), `<span class="highlighted">${errorWord}</span>`);
-    });
+// Create a highlighted version of the content
+let highlightedContent = textArea.value;
 
-    // Update the textarea with highlighted content
-    updateTextAreaWithHTML(textArea, highlightedContent);
+matches.forEach(match => {
+    const errorWord = match.context.text.substring(match.context.offset, match.context.offset + match.context.length);
+    // Replace the error word with a highlighted version
+    highlightedContent = highlightedContent.replace(new RegExp(`\\b${errorWord}\\b`, 'g'), `<span class="highlighted">${errorWord}</span>`);
+});
+
+// Update the textarea with highlighted content
+updateTextAreaWithHTML(textArea, highlightedContent);
 }
 
 function getTextAreaByType(type) {
-    if (type === "text/html") {
-        return htmlTextArea;
-    } else if (type === "text/css") {
-        return cssTextArea;
-    } else if (type === "application/javascript" || type === "text/javascript") {
-        return jsTextArea;
-    }
-    return null;
+if (type === "text/html") {
+    return htmlTextArea;
+} else if (type === "text/css") {
+    return cssTextArea;
+} else if (type === "application/javascript" || type === "text/javascript") {
+    return jsTextArea;
+}
+return null;
 }
 
-    </script>
+</script>
 </body>
 </html>

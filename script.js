@@ -281,3 +281,90 @@ document.addEventListener('DOMContentLoaded', function() {
         toggleTheme();
     }
 });
+function adjustView() {
+    const outputContainer = document.querySelector('.output-container');
+    const editorContainer = document.querySelector('.editor-container');
+
+    const width = window.innerWidth; // Get the current window width
+
+    if (width >= 1024) { // PC view
+        showSidePanel(); // Default to show side panel for PC
+    } else if (width >= 768) { // Tablet view
+        halfView(); // Default to half view for Tablet
+    } else { // Mobile view
+        closeView(); // Default to closed view for Mobile
+    }
+}
+
+function showSidePanel() {
+    const outputContainer = document.querySelector('.output-container');
+    const editorContainer = document.querySelector('.editor-container');
+
+    outputContainer.style.flex = '1 1 70%';  // Box 2 takes 70%
+    editorContainer.style.flex = '1 1 30%';  // Box 1 takes 30%
+}
+
+function halfView() {
+    const outputContainer = document.querySelector('.output-container');
+    const editorContainer = document.querySelector('.editor-container');
+
+    outputContainer.style.flex = '1 1 50%';  // Both boxes take 50%
+    editorContainer.style.flex = '1 1 50%';
+}
+
+function closeView() {
+    const outputContainer = document.querySelector('.output-container');
+    const editorContainer = document.querySelector('.editor-container');
+
+    outputContainer.style.flex = '1 1 8%';  // Both boxes take 50%
+    editorContainer.style.flex = '1 1 40%';
+}
+
+// Call adjustView() on load and resize
+window.addEventListener('load', adjustView);
+window.addEventListener('resize', adjustView);
+
+document.addEventListener("keydown", function(event) {
+    const activeElement = document.activeElement;
+    
+    // Undo
+    if (event.ctrlKey && event.key === "z") {
+        event.preventDefault();
+        undo(); // Call your undo function
+    }
+    
+    // Redo
+    if (event.ctrlKey && (event.key === "y" || (event.key === "z" && event.shiftKey))) {
+        event.preventDefault();
+        redo(); // Call your redo function
+    }
+
+    // Select All
+    if (event.ctrlKey && event.key === "a") {
+        event.preventDefault();
+        activeElement.select();
+    }
+
+    // Copy, Cut, Paste
+    if (event.ctrlKey && (event.key === "c" || event.key === "x" || event.key === "v")) {
+        // Default copy/cut/paste works without additional code
+    }
+
+    // Comment / Uncomment
+    if (event.ctrlKey && event.key === "/") {
+        event.preventDefault();
+        commentSelectedCode(activeElement); // Implement this function to toggle comments
+    }
+
+    // Save
+    if (event.ctrlKey && event.key === "s") {
+        event.preventDefault();
+        saveFiles(); // Call your save function
+    }
+
+    // Toggle Dark/Light Mode
+    if (event.ctrlKey && event.key === "l") {
+        event.preventDefault();
+        toggleDarkLightMode(); // Implement your mode toggle function
+    }
+});
