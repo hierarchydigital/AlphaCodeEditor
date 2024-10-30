@@ -413,7 +413,12 @@ textarea {
 </div>
 <script src="script.js"></script>
 <script>
-   
+    // Check the screen width on page load
+    window.onload = function() {
+        if (window.innerWidth >= 768) { // Set the width limit for mobile devices
+            window.location.href = "index.html"; // Redirect to pc page
+        }
+    };
       // Wait for the page to load
 window.addEventListener('load', function() {
     // Show the loader
